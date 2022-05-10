@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $db->prepare("UPDATE members SET name = ?, email = ?, date = ?, gender = ?, limbs = ?, bio = ?, policy = ? WHERE login = ?");
             $stmt->execute(array($name, $email, $date, $gender, $limbs, $bio, $policy, $result['login']));
 
-            $superpowers = $db->prepare("DELETE FROM powersowners WHERE user_id = ?");
+            $superpowers = $db->prepare("DELETE FROM powersowners WHERE owner_id = ?");
             $superpowers->execute(array($member_id['id']));
 
             foreach ($select as $value) {
