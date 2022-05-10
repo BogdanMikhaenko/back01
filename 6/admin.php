@@ -176,7 +176,7 @@ if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
                         <td><?php echo $value['gender'] ?></td>
                         <td>
                             <?php
-                            $powers = $db->prepare("SELECT distinct name from powersowners join superpowers2 pow on power_id = pow.id where owner_id = ??");
+                            $powers = $db->prepare("SELECT distinct name from powersowners join superpowers2 pow on power_id = pow.id where owner_id = ?");
                             $powers->execute(array($value['id']));
                             $superpowers = $powers->fetchAll(PDO::FETCH_ASSOC);
                             echo $superpowers['name'];
