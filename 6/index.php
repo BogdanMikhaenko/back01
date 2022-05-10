@@ -233,7 +233,7 @@ else {
         $power_id = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $superpowers = $db->prepare("INSERT INTO powersowners SET power_id = ?, owner_id = ? ");
-        $superpowers->execute(array($power_id, $user_id['id']));
+        $superpowers->execute(array($power_id['id'], $user_id['id']));
       }
     } catch (PDOException $e) {
       print('Error : ' . $e->getMessage());
@@ -256,7 +256,7 @@ else {
         $power_id = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $superpowers = $db->prepare("INSERT INTO powersowners SET power_id = ?, owner_id = ? ");
-        $superpowers->execute(array($power_id, $user_id));
+        $superpowers->execute(array($power_id['id'], $user_id));
       }
     } catch (PDOException $e) {
       print('Error : ' . $e->getMessage());
