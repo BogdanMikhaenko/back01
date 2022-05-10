@@ -181,7 +181,7 @@ if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
                             $superpowers = $powers->fetchAll(PDO::FETCH_ASSOC);
                             $str = "";
                             foreach ($superpowers as $power) {
-                                $str .= $power . ',';
+                                $str .= $power['name'] . ',';
                             }
                             echo $str;
                             ?>
