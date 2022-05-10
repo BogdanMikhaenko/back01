@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->execute(array($name, $email, $date, $gender, $limbs, $bio, $policy, $result['login']));
 
             $superpowers = $db->prepare("DELETE FROM powersowners WHERE user_id = ?");
-            $superpowers->execute(array($user_id['id']));
+            $superpowers->execute(array($member_id['id']));
 
             foreach ($select as $value) {
                 $stmt = $db->prepare("SELECT id from superpowers2 WHERE name = ?");
