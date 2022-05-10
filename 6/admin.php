@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $db->prepare("DELETE FROM members WHERE login = ?");
             $stmt->execute(array($_POST['delete']));
 
-            $powers = $db->prepare("DELETE FROM powers2 where user_login = ?");
-            $powers->execute(array($_POST['delete']));
+            $powers = $db->prepare("DELETE FROM powersowners where owner_id = ?");
+            $powers->execute(array($_COOKIE['user_id']));
             header('Location: ?delete_error=0');
         }
     } else if (!empty($_POST['edit'])) {
@@ -62,8 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $db->prepare("SELECT login FROM members WHERE id = ?");
             $stmt->execute(array($member_id));
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            setcookie('login_value', $result['login'], time() + 12 * 30 * 24 * 60 * 60);
 
             $stmt = $db->prepare("UPDATE members SET name = ?, email = ?, date = ?, gender = ?, limbs = ?, bio = ?, policy = ? WHERE login = ?");
             $stmt->execute(array($name, $email, $date, $gender, $limbs, $bio, $policy, $result['login']));
@@ -178,10 +176,10 @@ if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
                         <td><?php echo $value['gender'] ?></td>
                         <td>
                             <?php
-                            $powers = $db->prepare("SELECT * FROM powers2 where user_login = ?");
-                            $powers->execute(array($value['login']));
-                            $superpowers = $powers->fetch(PDO::FETCH_ASSOC);
-                            echo $superpowers['powers'];
+                            $powers = $db->prepare("SELECT distinct name from powersowners join superpowers2 pow on power_id = pow.id where owner_id = ??");
+                            $powers->execute(array($_COOKIE['user_id']));
+                            $superpowers = $powers->fetchAll(PDO::FETCH_ASSOC);
+                            echo $superpowers['name'];
                             ?>
                         </td>
                         <td id="bio">
