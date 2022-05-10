@@ -224,7 +224,7 @@ else {
       $stmt->execute(array($member));
       $user_id = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      $superpowers = $db->prepare("DELETE FROM powersowners WHERE user_id = ?");
+      $superpowers = $db->prepare("DELETE FROM powersowners WHERE owner_id = ?");
       $superpowers->execute(array($user_id['id']));
 
       foreach ($powers as $value) {
