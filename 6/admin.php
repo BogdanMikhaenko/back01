@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $power_id = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 $superpowers = $db->prepare("INSERT INTO powersowners SET power_id = ?, owner_id = ? ");
-                $superpowers->execute(array($power_id, $member_id));
+                $superpowers->execute(array($power_id['id'], $member_id));
             }
         } catch (PDOException $e) {
             print('Error : ' . $e->getMessage());
