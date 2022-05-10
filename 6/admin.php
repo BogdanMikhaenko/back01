@@ -116,7 +116,7 @@ if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
     $stmt->execute([]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $stmt = $db->prepare("SELECT pow.name AS name, count(*) AS amount FROM powersowners JOIN powers pow ON power_id = pow.id GROUP BY power_id");
+    $stmt = $db->prepare("SELECT pow.name AS name, count(*) AS amount FROM powersowners JOIN superpowers2 pow ON power_id = pow.id GROUP BY power_id");
     $stmt->execute();
     $powersCount = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
