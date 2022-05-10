@@ -179,7 +179,8 @@ if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
                             $powers = $db->prepare("SELECT distinct name from powersowners join superpowers2 pow on power_id = pow.id where owner_id = ?");
                             $powers->execute(array($value['id']));
                             $superpowers = $powers->fetchAll(PDO::FETCH_ASSOC);
-                            echo implode(',', $superpowers);
+                            $superpowers = implode(',', $superpowers);
+                            echo $superpowers;
                             ?>
                         </td>
                         <td id="bio">
